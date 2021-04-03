@@ -25,21 +25,21 @@ const style = theme => ({
     slider : {
         display : "flex",
         width : "100%",
-        height : "100%", 
+        height : "100%",
         overflow : "hidden",
     },
-    sliderContainer : { 
+    sliderContainer : {
         position : "relative",
-        width : "auto", 
+        width : "auto",
         display : "flex",
         transition : "right 1s",
     },
     sideSliderContainer : {
         display : "flex",
         width : "100%",
-        height : "100%", 
+        height : "100%",
         overflow : "hidden",
-        position : "absolute", 
+        position : "absolute",
         transition : "right 1s, zIndex 3s"
     },
     grow : {
@@ -63,7 +63,6 @@ class _Carousel extends Component {
         this.state = {
             activeIndex : 0,
             windowWidth : window.innerWidth,
-            aboutToChange : false,
         }
         this.interval = this.props.interval || 10000
     }
@@ -79,7 +78,7 @@ class _Carousel extends Component {
         clearInterval(this.runningInterval);
         clearInterval(this.sliderTimer);
     }
-    
+
     autoSlide(){
         this.runningInterval = setInterval(()=>{
             this.next();
@@ -114,14 +113,14 @@ class _Carousel extends Component {
         } = this.state;
         return (
             <div {...this.props.commonProps} className={classes.root}>
-                {!this.props.hideOverlay && 
-                <div className={classes.overlay} 
+                {!this.props.hideOverlay &&
+                <div className={classes.overlay}
                     {...this.props.commonProps}>
                     {activeIndex !== 0 && <IconButton onClick={this.prev.bind(this)}>
                         <ArrowLeft fontSize="large"/>
                     </IconButton>}
                     <div className={classes.grow}>
-                        {items && items[activeIndex] ? 
+                        {items && items[activeIndex] ?
                             <div style={{
                                 padding : 20,
                                 display : "flex",
@@ -138,13 +137,13 @@ class _Carousel extends Component {
                         <ArrowRight fontSize="large"/>
                     </IconButton>}
                 </div>}
-                <div ref="slider" className={classes.sideSliderContainer} 
+                <div ref="slider" className={classes.sideSliderContainer}
                 style={{
-                    zIndex : activeIndex === 0 ? 100 : -1,                   
+                    zIndex : activeIndex === 0 ? 100 : -1,
                 }}>
-                    {items && <img 
-                        style={{height : "100%", width : windowWidth}} 
-                        src={items[0] && (baseUrl ? baseUrl + items[0].src : items[0].src)} 
+                    {items && <img
+                        style={{height : "100%", width : windowWidth}}
+                        src={items[0] && (baseUrl ? baseUrl + items[0].src : items[0].src)}
                         title={items[0] && items[0].title}/>}
                 </div>
                 <div ref="slider" className={classes.slider}>
@@ -152,14 +151,14 @@ class _Carousel extends Component {
                         style={{
                             right : (windowWidth * activeIndex)
                         }}>
-                        {items && items.map((item, index)=>{                            
-                            return <img 
+                        {items && items.map((item, index)=>{
+                            return <img
                                 key={index}
-                                style={{height : "100%", width : windowWidth}} 
-                                src={baseUrl ? baseUrl + item.src : item.src} 
+                                style={{height : "100%", width : windowWidth}}
+                                src={baseUrl ? baseUrl + item.src : item.src}
                                 title={item.title}/>
                         })}
-                    </div>    
+                    </div>
                 </div>
             </div>
         );
@@ -171,6 +170,5 @@ _Carousel.propTypes = {
     baseUrl : PropTypes.string,
     hideOverlay : PropTypes.bool,
     interval : PropTypes.number,
-    commonProps : PropTypes.object,
 };
 export const Carousel = withStyles(style)(_Carousel);
