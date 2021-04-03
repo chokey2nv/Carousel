@@ -63,7 +63,6 @@ class _Carousel extends Component {
         this.state = {
             activeIndex : 0,
             windowWidth : window.innerWidth,
-            aboutToChange : false,
         }
         this.interval = this.props.interval || 10000
     }
